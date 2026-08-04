@@ -1,0 +1,8 @@
+services:
+  fbclonewebsite:
+    image: fbclonewebsite
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - 8000:8000
