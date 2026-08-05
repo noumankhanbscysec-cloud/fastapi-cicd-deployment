@@ -39,6 +39,25 @@ def get_products(
     )
 
 
+@app.get("/products/filter", response_model=list[ProductOut])
+def filter_products(
+    category: str | None = Query(default=None, description="Filter by category"),
+    min_price: float | None = Query(default=None, ge=0),
+    max_price: float | None = Query(default=None, ge=0),
+    search: str | None = Query(default=None, description="Search by name, category, or description"),
+    featured: bool | None = Query(default=None),
+    in_stock: bool | None = Query(default=None),
+) -> list[dict[str, Any]]:
+    return list_products(
+        category=category,
+        min_price=min_price,
+        max_price=max_price,
+        search=search,
+        featured=featured,
+        in_stock=in_stock,
+    )
+
+
 @app.get("/products/{product_id}", response_model=ProductOut)
 def get_product(product_id: int) -> dict[str, Any]:
     product = get_product_by_id(product_id)
