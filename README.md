@@ -86,7 +86,7 @@ WantedBy=multi-user.target
 - Deployment to a managed cloud platform (AWS / Azure / GCP) or Kubernetes
 - Automated testing as a CI gate
 - Monitoring with Prometheus & Grafana
-- Infrastructure as Code with Terraform
+- Infrastructure as Code with Terraform just change 
 - HTTPS via reverse proxy + hardened secrets handling
 
 ---
