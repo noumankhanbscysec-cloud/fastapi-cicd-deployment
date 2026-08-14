@@ -85,10 +85,21 @@ WantedBy=multi-user.target
 - Docker containerization
 - Deployment to a managed cloud platform (AWS / Azure / GCP) or Kubernetes
 - Automated testing as a CI gate
+
+
+
+
+
+
+
 - Monitoring with Prometheus & Grafana
 - Infrastructure as Code with Terraform just change 
 - HTTPS via reverse proxy + hardened secrets handling
 
 ---
-*Full project write-up with annotated screenshots: see `Project_Portfolio_Documentation.docx`.*
+*Full project write-up with annotated screenshots: see `Project_Portfolio_Documentation.docx       `.*
+commit 
+
+
+
 
