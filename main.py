@@ -180,9 +180,11 @@ def admin_overview() -> dict[str, Any]:
 
 @app.put("/admin/products/{product_id}/stock", response_model=ProductOut
          )
-# def update_product_stock(product_id: int, stock: int = Query(..., ge=0)) -> dict[str, Any]:
-#     product = get_product_by_id(product_id)
-#     if not product:
-#         raise HTTPException(status_code=404, detail="Product not found")
-#     updated_product = update_product(product_id, {"stock": stock})
-#     return updated_product
+def update_product_stock(product_id: int, stock: int = Query(..., ge=0)) -> dict[str, Any]:
+    product = get_product_by_id(product_id)
+    if not product:
+        raise HTTPException(status_code=404, detail="Product not found")
+    updated_product = update_product(product_id, {"stock": stock})
+    return updated_product
+
+@app.get()
