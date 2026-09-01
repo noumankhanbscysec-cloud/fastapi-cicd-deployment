@@ -186,5 +186,4 @@ def update_product_stock(product_id: int, stock: int = Query(..., ge=0)) -> dict
         raise HTTPException(status_code=404, detail="Product not found")
     updated_product = update_product(product_id, {"stock": stock})
     return updated_product
-
-@app.get()
+ 
