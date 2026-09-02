@@ -273,8 +273,7 @@ def get_category_by_id(category_id: int) -> dict[str, Any] | None:
 
 def create_category(payload: dict[str, Any]) -> dict[str, Any]:
     with get_connection() as conn:
-        category_count = conn.execute("SELECT COUNT(*) FROM categories").fetchone()[0]
-        code = f"{category_count + 1:02d}"
+        code = next_category_code(conn)
         cursor = conn.execute(
             """
             INSERT INTO categories (name, slug, description, code)
@@ -360,7 +359,7 @@ def list_products(
         query.append("AND p.price <= ?")
         params.append(max_price)
     if search:
-        query.append("AND (LOWER(p.name) LIKE ? OR LOWER(p.description) LIKE ? OR LOWER(c.name) LIKE ? OR LOWER(c.slug) LIKE ?)")
+        query.append("AND (LOWER(p.name) LIKE ? OR LOWER(COALESCE(p.description, '')) LIKE ? OR LOWER(COALESCE(c.name, '')) LIKE ? OR LOWER(COALESCE(c.slug, '')) LIKE ?)")
         term = f"%{search.lower()}%"
         params.extend([term, term, term, term])
     if featured is not None:
