@@ -308,6 +308,12 @@ def update_category(category_id: int, payload: dict[str, Any]) -> dict[str, Any]
 
 def delete_category(category_id: int) -> bool:
     with get_connection() as conn:
+        product_count = conn.execute(
+            "SELECT COUNT(*) FROM products WHERE category_id = ?",
+            (category_id,),
+        ).fetchone()[0]
+        if product_count:
+            return False
         cursor = conn.execute("DELETE FROM categories WHERE id = ?", (category_id,))
         conn.commit()
         return cursor.rowcount > 0
@@ -405,9 +411,8 @@ def get_product_by_id(product_id: int) -> dict[str, Any] | None:
 
 def create_product(payload: dict[str, Any]) -> dict[str, Any]:
     with get_connection() as conn:
-        product_count = conn.execute("SELECT COUNT(*) FROM products").fetchone()[0]
         payload = dict(payload)
-        payload["product_code"] = f"{product_count + 1:02d}"
+        payload["product_code"] = next_product_code(conn)
         cursor = conn.execute(
             """
             INSERT INTO products (name, slug, description, category_id, price, stock, featured, image_url, product_code)

@@ -96,10 +96,10 @@ WantedBy=multi-user.target
 - Infrastructure as Code with Terraform just change 
 - HTTPS via reverse proxy + hardened secrets handling
 
+
 ---
 *Full project write-up with annotated screenshots: see `Project_Portfolio_Documentation.docx       `.*
-
-
+noumankhan.bscysec@gmail.com
 
 
 

@@ -62,6 +62,8 @@ def update_existing_category(category_id: int, payload: CategoryUpdate) -> dict[
 def delete_existing_category(category_id: int) -> dict[str, str]:
     deleted = delete_category(category_id)
     if not deleted:
+        if get_category_by_id(category_id) and list_products(category_id=category_id):
+            raise HTTPException(status_code=409, detail="Category has products and cannot be deleted")
         raise HTTPException(status_code=404, detail="Category not found")
     return {"message": f"Category {category_id} deleted successfully"}
 
