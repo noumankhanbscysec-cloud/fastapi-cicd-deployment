@@ -189,3 +189,9 @@ def update_product_stock(product_id: int, stock: int = Query(..., ge=0)) -> dict
     updated_product = update_product(product_id, {"stock": stock})
     return updated_product
  
+@app.get("/admin/products/low-stock", response_model=list[ProductOut])
+def get_low_stock_products(threshold: int = Query(5, ge=0)) -> list[dict[str, Any]]:
+    products = list_products()
+    low_stock_products = [product for product in products if product["stock"] <= threshold]
+    return low_stock_products
+
