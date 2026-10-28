@@ -1,3 +1,4 @@
+
 name: Deploy FastAPI
 
 on:
@@ -5,9 +6,11 @@ on:
     branches:
       - main
 
+permissions:
+  contents: read
+
 jobs:
   deploy:
-
     runs-on: self-hosted
 
     steps:
@@ -18,3 +21,4 @@ jobs:
         run: |
           chmod +x deploy.sh
           ./deploy.sh
+
