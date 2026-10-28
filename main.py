@@ -208,11 +208,11 @@ def get_featured_products() -> list[dict[str, Any]]:
     featured_products = [product for product in products if product["featured"]]
     return featured_products  ## the endpoint to get products that are featured
 
-@app.get("/admin/products/search", response_model=list[ProductOut])
-def search_products(query: str = Query(..., description="Search query")) -> list[dict       
-[str, Any]]:
-    products = list_products(search=query)
-    return products  ## the endpoint to search for products by name, category, or description
+# @app.get("/admin/products/search", response_model=list[ProductOut])
+# def search_products(query: str = Query(..., description="Search query")) -> list[dict       
+# [str, Any]]:
+#     products = list_products(search=query)
+#     return products  ## the endpoint to search for products by name, category, or description
 
 
 
